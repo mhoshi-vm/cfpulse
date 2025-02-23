@@ -1,0 +1,4 @@
+cf:
+  apiHost: api.sys.tas.vmtanzu.com
+  username: admin
+  password: ${CF_PASSWORD}
