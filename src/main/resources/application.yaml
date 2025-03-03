@@ -1,4 +1,4 @@
 cf:
-  apiHost: api.sys.tas.vmtanzu.com
-  username: admin
-  password: ${CF_PASSWORD}
+  apiHost: ${vcap.services.cf-client.credentials.apihost:${CF_APIHOST:}}
+  username: ${vcap.services.cf-client.credentials.username:${CF_USERNAME:}}
+  password: ${vcap.services.cf-client.credentials.password:${CF_PASSWORD:}}
