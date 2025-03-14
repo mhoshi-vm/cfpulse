@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class CfTools {
@@ -158,8 +159,8 @@ public class CfTools {
     }
 
     /*
-    Services
- */
+        Services
+    */
     private static final String SERVICE_INSTANCE_LIST = "Return the service instances (SIs) in my Cloud Foundry space";
 
     @Tool(description = SERVICE_INSTANCE_LIST)
@@ -209,6 +210,34 @@ public class CfTools {
                 applicationName(applicationName).
                 build();
         cloudFoundryOperations(toolContext).services().unbind(request).block();
+    }
+
+    private static final String DELETE_SERVICE_INSTANCE = "Delete a service instance from a Cloud Foundry space";
+
+    @Tool(description = DELETE_SERVICE_INSTANCE)
+    public void deleteServiceInstance(@ToolParam(description = SI_NAME_PARAM) String serviceInstanceName,
+                                      ToolContext toolContext) {
+        DeleteServiceInstanceRequest request = DeleteServiceInstanceRequest.builder().
+                name(serviceInstanceName).
+                build();
+        cloudFoundryOperations(toolContext).services().deleteInstance(request).block();
+    }
+
+    private static final String CREATE_USER_PROVIDED_SERVICE_INSTANCE = "Creates a user provided service instance (cups) in the Cloud Foundry space";
+    private static final String CREDENTIALS_PARAM = "Key/value pairs for credentials that will be part of the user provided service instance";
+    private static final String TAGS_PARAM = "Tags that will be associated with the user provided service instance";
+
+    @Tool(description = CREATE_USER_PROVIDED_SERVICE_INSTANCE)
+    public void createUserProvidedServiceInstance(@ToolParam(description = SI_NAME_PARAM) String serviceInstanceName,
+                                      @ToolParam(description = CREDENTIALS_PARAM) Map<String,String> credentials,
+                                      @ToolParam(description = TAGS_PARAM, required = false) List<String> tags,
+                                      ToolContext toolContext) {
+        CreateUserProvidedServiceInstanceRequest request = CreateUserProvidedServiceInstanceRequest.builder().
+                name(serviceInstanceName).
+                credentials(credentials).
+                tags(tags).
+                build();
+        cloudFoundryOperations(toolContext).services().createUserProvidedInstance(request).block();
     }
 
     /*
