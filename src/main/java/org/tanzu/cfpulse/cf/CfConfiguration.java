@@ -60,8 +60,8 @@ public class CfConfiguration {
 
     @Bean
     DefaultCloudFoundryOperations.Builder cloudFoundryOperationsBuilder(CloudFoundryClient cloudFoundryClient,
-                                                         DopplerClient dopplerClient,
-                                                         UaaClient uaaClient) {
+                                                                        DopplerClient dopplerClient,
+                                                                        UaaClient uaaClient) {
         return DefaultCloudFoundryOperations.builder()
                 .cloudFoundryClient(cloudFoundryClient)
                 .dopplerClient(dopplerClient)

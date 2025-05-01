@@ -16,7 +16,7 @@
 
 	<properties>
 		<java.version>21</java.version>
-		<spring-ai.version>1.0.0-M6</spring-ai.version>
+		<spring-ai.version>1.0.0-M7</spring-ai.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -25,7 +25,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.ai</groupId>
-			<artifactId>spring-ai-openai-spring-boot-starter</artifactId>
+			<artifactId>spring-ai-starter-mcp-server</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.ai</groupId>
+			<artifactId>spring-ai-starter-mcp-server-webmvc</artifactId>
 		</dependency>
 
 		<dependency>
@@ -67,66 +71,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>com.github.eirslett</groupId>
-				<artifactId>frontend-maven-plugin</artifactId>
-				<version>1.15.1</version>
-				<configuration>
-					<workingDirectory>src/main/frontend</workingDirectory>
-				</configuration>
-				<executions>
-					<execution>
-						<id>install node and npm</id>
-						<goals>
-							<goal>install-node-and-npm</goal>
-						</goals>
-						<configuration>
-							<!-- See https://nodejs.org/en/download/ for latest node and npm (lts) versions -->
-							<nodeVersion>v22.12.0</nodeVersion>
-						</configuration>
-					</execution>
-					<execution>
-						<id>npm ci</id>
-						<goals>
-							<goal>npm</goal>
-						</goals>
-						<!-- Optional configuration which provides for running any npm command -->
-						<configuration>
-							<arguments>ci</arguments>
-						</configuration>
-					</execution>
-					<execution>
-						<id>npm run build</id>
-						<goals>
-							<goal>npm</goal>
-						</goals>
-						<configuration>
-							<arguments>run build</arguments>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>3.2.0</version>
-				<executions>
-					<execution>
-						<id>move-resources</id>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-						<configuration>
-							<executable>sh</executable>
-							<arguments>
-								<argument>-c</argument>
-								<argument>mkdir -p ${project.basedir}/target/classes/static &amp;&amp; cp -r ${project.basedir}/src/main/frontend/dist/pulseui/browser/* ${project.basedir}/target/classes/static</argument>
-							</arguments>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>

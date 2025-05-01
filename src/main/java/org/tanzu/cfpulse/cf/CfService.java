@@ -21,17 +21,17 @@ public class CfService {
         if (org != null && !org.isEmpty()) {
             builder = builder.organization(org);
         }
-        if ( space != null && !space.isEmpty()) {
+        if (space != null && !space.isEmpty()) {
             builder = builder.space(space);
         }
         return builder.build();
     }
 
     public List<OrganizationSummary> allOrgs() {
-        return createCloudFoundryOperations(null,null).organizations().list().collectList().block();
+        return createCloudFoundryOperations(null, null).organizations().list().collectList().block();
     }
 
     public List<SpaceSummary> allSpaces(String org) {
-        return createCloudFoundryOperations(org,null).spaces().list().collectList().block();
+        return createCloudFoundryOperations(org, null).spaces().list().collectList().block();
     }
 }

@@ -37,9 +37,6 @@ public class CfController {
         return result;
     }
 
-    public record Org(String name) {
-    }
-
     @GetMapping("/spaces")
     public List<Space> spaces(@RequestParam("org") String org) {
         List<Space> result = new ArrayList<>();
@@ -48,9 +45,6 @@ public class CfController {
         });
         result.sort((r1, r2) -> r1.name.compareToIgnoreCase(r2.name));
         return result;
-    }
-
-    public record Space(String name) {
     }
 
     @GetMapping("/logs/{org}/{space}")
@@ -70,5 +64,11 @@ public class CfController {
         }
 
         return new ArrayList<>();
+    }
+
+    public record Org(String name) {
+    }
+
+    public record Space(String name) {
     }
 }
