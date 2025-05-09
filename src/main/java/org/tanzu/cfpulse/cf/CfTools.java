@@ -169,8 +169,8 @@ public class CfTools {
     }
 
     @Tool(description = ORGANIZATION_LIST)
-    public List<OrganizationSummary> organizationsList(@ToolParam(description = ORG_PARAM) String org,
-                                                       @ToolParam(description = SPACE_PARAM) String space) {
+    public List<OrganizationSummary> organizationsList(@ToolParam(description = ORG_PARAM, required = false) String org,
+                                                       @ToolParam(description = SPACE_PARAM, required = false) String space) {
         return cloudFoundryOperations(org, space).organizations().list().collectList().block();
     }
 
@@ -245,7 +245,7 @@ public class CfTools {
 
     @Tool(description = SPACE_LIST)
     public List<SpaceSummary> spacesList(@ToolParam(description = ORG_PARAM) String org,
-                                         @ToolParam(description = SPACE_PARAM) String space) {
+                                         @ToolParam(description = SPACE_PARAM, required = false) String space) {
         return cloudFoundryOperations(org, space).spaces().list().collectList().block();
     }
 
